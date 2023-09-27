@@ -1,0 +1,30 @@
+/* Example styles, customize as needed */
+:host {
+    background-color: #007acc;
+  }
+  
+  .menu {
+    background-color: #007acc !important;
+  }
+  
+  img {
+    height: 50px;
+    margin: 10px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  

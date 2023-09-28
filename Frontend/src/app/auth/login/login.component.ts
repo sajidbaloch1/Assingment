@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Registeration Error',
-          detail: errors,
+          detail: 'please give me valid email and password',
         });
       },
       complete: () => {

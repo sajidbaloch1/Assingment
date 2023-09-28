@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Registeration Error',
-          detail: errors,
+          detail: 'some thing went wrong kindly email must be email and put the all field',
         });
       },
       complete: () => {

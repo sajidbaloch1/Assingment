@@ -18,5 +18,7 @@ run this command `npm install`
 and then start the serve of this command `ng serve` 
 
 
+this project is full authorized I have use typmon jwt token so you must install the laravel composer successfully
+
 
 # Assingment

@@ -35,7 +35,7 @@
   <div class="col-10 m-auto">
     <div class="card">
       <p-table
-        [value]="films?.data"
+        [value]="films.data"
         [rows]="20"
         [totalRecords]="filmCount"
         [showCurrentPageReport]="true"
@@ -229,7 +229,7 @@
               <div class="col-12 md:col-12">
                 <input
                   id="release_date"
-                  type="text"
+                  type="date"
                   formControlName="release_date"
                   [ngClass]="
                     createFilmForm.get('release_date')?.value?.length === 0

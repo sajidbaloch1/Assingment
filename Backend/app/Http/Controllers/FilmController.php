@@ -14,7 +14,7 @@ class FilmController extends Controller
     {
         $page = $request->input('page');
         $limit = $request->input('limit');
-        $films = Film::paginate($limit);
+        $films = Film::orderBy('id','asc')->paginate($limit);
         $total_count = $films->total();
         $response = [
             'data' => $films->items(),

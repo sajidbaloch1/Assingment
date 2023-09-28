@@ -20,7 +20,6 @@ export class FilmsComponent implements OnInit {
   pageSize = 20;
   currentPage = 1;
   searchText = '';
-  films: any;
   createFilmForm!: FormGroup;
   selectedFilmData!: IFilm | null;
 
@@ -31,7 +30,7 @@ export class FilmsComponent implements OnInit {
   showDeleteFilm = false;
   public isLoading = true;
   isFormLoading = true;
-  customers: IListInterface<IFilm> = {
+  films: IListInterface<IFilm> = {
     data: [],
     total_count: 0,
     limit: 20,
@@ -100,8 +99,8 @@ export class FilmsComponent implements OnInit {
         return idMatch || nameMatch || phoneMatch;
       });
 
-      this.films.list = filteredList;
-      this.films.total_item_count = filteredList.length;
+      this.films.data = filteredList;
+      this.films.total_count = filteredList.length;
     }
   }
 
@@ -242,14 +241,16 @@ export class FilmsComponent implements OnInit {
 
   public submit(): void {
     this.isSubmitted = true;
-    if (this.createFilmForm.invalid) {
-      return;
-    }
+    // if (this.createFilmForm.invalid) {
+    //   return;
+    // }
+    console.log("HEllo")
     const formValue = this.createFilmForm.value;
+    console.log(formValue)
     this.isFormLoading = true;
     if (this.selectedFilmData && this.selectedFilmData.id) {
       formValue.id = this.selectedFilmData.id;
-
+      console.log(formValue);
       this.filmService
         .updateFilm(this.selectedFilmData.id, formValue)
         .subscribe(() => {
@@ -262,6 +263,7 @@ export class FilmsComponent implements OnInit {
           this.showCreateFilm = false;
           this.list();
         });
+      
     } else {
       this.filmService.createFilm(formValue).subscribe(() => {
         this.messageService.add({

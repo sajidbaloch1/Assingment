@@ -90,13 +90,37 @@ export class FilmsComponent implements OnInit {
             .toString()
             .toLowerCase()
             .includes(this.searchText.toLowerCase());
-        const phoneMatch =
-          film.phone &&
-          film.phone
+        const photoMatch =
+          film.photo &&
+          film.photo
             .toString()
             .toLowerCase()
             .includes(this.searchText.toLowerCase());
-        return idMatch || nameMatch || phoneMatch;
+        const discriptionMatch =
+          film.discreption &&
+          film.discreption
+            .toString()
+            .toLowerCase()
+            .includes(this.searchText.toLowerCase());
+        const genreMatch =
+          film.genre &&
+          film.genre
+            .toString()
+            .toLowerCase()
+            .includes(this.searchText.toLowerCase());
+        const ticketPriceMatch =
+          film.ticket_price &&
+          film.ticket_price
+            .toString()
+            .toLowerCase()
+            .includes(this.searchText.toLowerCase());
+        const releaseDateMatch =
+          film.release_date &&
+          film.release_date
+            .toString()
+            .toLowerCase()
+            .includes(this.searchText.toLowerCase());
+        return idMatch || nameMatch || photoMatch || discriptionMatch || genreMatch || ticketPriceMatch || releaseDateMatch;
       });
 
       this.films.data = filteredList;

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
 })
-export class LoginComponent implements OnInit {
-  createLoginForm!: FormGroup;
+export class RegisterComponent implements OnInit {
+  createUserForm!: FormGroup;
   isFormLoading = true;
   isSubmitted = false;
 
@@ -25,7 +25,8 @@ export class LoginComponent implements OnInit {
   }
 
   public initUserForm(): void {
-    this.createLoginForm = new FormGroup({
+    this.createUserForm = new FormGroup({
+      name: new FormControl(),
       email: new FormControl(),
       password: new FormControl(),
     });
@@ -33,27 +34,25 @@ export class LoginComponent implements OnInit {
 
   public submit(): void {
     this.isSubmitted = true;
-    if (this.createLoginForm.invalid) {
+    if (this.createUserForm.invalid) {
       return;
     }
-    const formValue = this.createLoginForm.value;
-    console.log(formValue);
+    const formValue = this.createUserForm.value;
     this.isFormLoading = true;
-    this.authService.post('auth/login', formValue).subscribe({
-      next: (res:any) => {
-        console.log(res.access_token);
-        localStorage.setItem('x-auth-token', res.access_token);
+    this.authService.post('auth/register', formValue).subscribe({
+      next: (res) => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Login Successful',
-          detail: 'You have successfully Logged In',
+          summary: 'Register Successful',
+          detail: 'You have successfully Registered',
         });
         setTimeout(() => {
-          this.router.navigate(['films']);
+          this.router.navigate(['login']);
         }, 400);
       },
       error: (error) => {
-        const errors = error.error;
+        const errors = JSON.parse(error.error);
+
         console.log(errors);
         this.messageService.add({
           severity: 'error',

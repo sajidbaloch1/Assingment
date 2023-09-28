@@ -245,7 +245,8 @@ export class FilmsComponent implements OnInit {
     if (this.createFilmForm.invalid) {
       return;
     }
-    const formValue: IFilm = this.createFilmForm.value;
+    const formValue = this.createFilmForm.value;
+    console.log(formValue)
     this.isFormLoading = true;
     if (this.selectedFilmData && this.selectedFilmData.id) {
       formValue.id = this.selectedFilmData.id;

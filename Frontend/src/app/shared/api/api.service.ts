@@ -14,18 +14,36 @@ export class ApiService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
-    return this.http.get<T>(`${environment.apiUrl}${path}`, { headers, params }); // Pass headers here
+    return this.http.get<T>(`${environment.apiUrl}${path}`, {
+      headers,
+      params,
+    }); // Pass headers here
   }
 
   public post<T, T1>(path: string, body: T1) {
-    return this.http.post<T>(`${environment.apiUrl}${path}`, body);
+    const token = localStorage.getItem('x-auth-token'); // Removed unnecessary JSON.parse
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<T>(`${environment.apiUrl}${path}`, body, { headers });
   }
 
   public put<T, T1>(path: string, body: T1) {
-    return this.http.put<T>(`${environment.apiUrl}${path}`, body);
+    const token = localStorage.getItem('x-auth-token'); // Removed unnecessary JSON.parse
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.put<T>(`${environment.apiUrl}${path}`, body, { headers });
   }
 
   public delete<T>(path: string) {
-    return this.http.delete<T>(`${environment.apiUrl}${path}`);
+    const token = localStorage.getItem('x-auth-token'); // Removed unnecessary JSON.parse
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.delete<T>(`${environment.apiUrl}${path}`, { headers });
   }
 }

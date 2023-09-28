@@ -31,7 +31,6 @@ class FilmController extends Controller
      */
     public function create()
     {
-        return "Create";
     }
 
     /**
@@ -39,7 +38,17 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $film = new Film();
+        $film->name = $request->input('name');
+        $film->description = $request->input('description');
+        $film->photo = $request->input('photo');
+        $film->genre = $request->input('genre');
+        $film->release_date = $request->input('release_date');
+        $film->country = $request->input('country');
+        $film->ticket_price = $request->input('ticket_price');
+        $film->save();
+
+        return response()->json($film, 201);
     }
 
     /**
@@ -61,9 +70,21 @@ class FilmController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $film = Film::findOrFail($id);
+        // Update fields
+        $film->name = $request->input('name');
+        $film->description = $request->input('description');
+        $film->photo = $request->input('photo');
+        $film->genre = $request->input('genre');
+        $film->release_date = $request->input('release_date');
+        $film->country = $request->input('country');
+        $film->ticket_price = $request->input('ticket_price');
+        // Update other fields as needed
+        $film->save();
+
+        return response()->json($film);
     }
 
     /**
@@ -71,6 +92,9 @@ class FilmController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $film = Film::findOrFail($id);
+        $film->delete();
+
+        return response()->json(['message' => 'Film deleted']);
     }
 }

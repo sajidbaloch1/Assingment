@@ -24,6 +24,7 @@ export class FilmService {
   }
 
   public updateFilm(filmId?: number, payload?: any) {
+
     return this.apiService.put(`films/${filmId}`, payload);
   }
 

@@ -27,8 +27,8 @@ export class FilmsComponent implements OnInit {
   isSubmitted = false;
   public isDeleteSubmitted = false;
   public isDialogLoading = false;
-  showCreateUser = false;
-  showDeleteUser = false;
+  showCreateFilm = false;
+  showDeleteFilm = false;
   public isLoading = true;
   isFormLoading = true;
   customers: IListInterface<IFilm> = {
@@ -145,10 +145,10 @@ export class FilmsComponent implements OnInit {
         [Validators.required, Validators.email]
       ),
       genre: new FormControl(
-        this.checkSelectedFormData<IFilm, boolean>(
+        this.checkSelectedFormData<IFilm, string>(
           this.selectedFilmData || {},
           'genre',
-          false
+          ''
         ),
         Validators.required
       ),
@@ -177,10 +177,10 @@ export class FilmsComponent implements OnInit {
         Validators.required
       ),
       ticket_price: new FormControl(
-        this.checkSelectedFormData<IFilm, string>(
+        this.checkSelectedFormData<IFilm, number>(
           this.selectedFilmData || {},
           'ticket_price',
-          ''
+          0
         ),
         Validators.required
       ),
@@ -202,12 +202,12 @@ export class FilmsComponent implements OnInit {
   }
   resetModal() {
     this.selectedFilmData = null;
-    this.showCreateUser = this.showDeleteUser = false;
+    this.showCreateFilm = this.showDeleteFilm = false;
     this.createFilmForm.reset();
   }
 
   closeModal() {
-    this.showCreateUser = this.showDeleteUser = false;
+    this.showCreateFilm = this.showDeleteFilm = false;
   }
 
   resetForm() {
@@ -246,7 +246,6 @@ export class FilmsComponent implements OnInit {
       return;
     }
     const formValue = this.createFilmForm.value;
-    console.log(formValue)
     this.isFormLoading = true;
     if (this.selectedFilmData && this.selectedFilmData.id) {
       formValue.id = this.selectedFilmData.id;
@@ -260,7 +259,7 @@ export class FilmsComponent implements OnInit {
             detail: 'Record has updated',
           });
           this.isFormLoading = false;
-          this.showCreateUser = false;
+          this.showCreateFilm = false;
           this.list();
         });
     } else {
@@ -271,7 +270,7 @@ export class FilmsComponent implements OnInit {
           detail: 'Record has Successfully',
         });
         this.isFormLoading = false;
-        this.showCreateUser = false;
+        this.showCreateFilm = false;
         this.list();
       });
     }
@@ -284,11 +283,11 @@ export class FilmsComponent implements OnInit {
     if (filmData) this.selectedFilmData = filmData;
     if (type === 'create' || type === 'edit') {
       this.initFilmForm();
-      this.showCreateUser = true;
-      this.showDeleteUser = false;
+      this.showCreateFilm = true;
+      this.showDeleteFilm = false;
     } else if (type === 'delete') {
-      this.showCreateUser = false;
-      this.showDeleteUser = true;
+      this.showCreateFilm = false;
+      this.showDeleteFilm = true;
     }
   }
 

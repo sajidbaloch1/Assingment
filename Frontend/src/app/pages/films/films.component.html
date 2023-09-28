@@ -115,7 +115,7 @@
   [modal]="true"
   [draggable]="false"
   [resizable]="false"
-  [(visible)]="showCreateUser"
+  [(visible)]="showCreateFilm"
   styleClass="p-fluid"
 >
   <ng-template pTemplate="header">
@@ -310,6 +310,34 @@
                 </div>
               </div>
             </div>
+            <div class="field grid">
+              <label for="ticket_price" class="col-12 mb-2 md:mb-0">Ticket Price</label>
+              <div class="col-12 md:col-12">
+                <input
+                  id="ticket_price"
+                  type="text"
+                  formControlName="ticket_price"
+                  [ngClass]="
+                    createFilmForm.get('ticket_price')?.value?.length === 0
+                      ? ''
+                      : 'field-active'
+                  "
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                />
+                <div
+                  class="text-red-500 mb-2"
+                  *ngIf="
+                    isSubmitted &&
+                    formControls['ticket_price'] &&
+                    formControls['ticket_price'].errors
+                  "
+                >
+                  <span *ngIf="formControls['ticket_price'].errors['required']"
+                    >Country is required</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -344,11 +372,11 @@
   [modal]="true"
   [draggable]="false"
   [resizable]="false"
-  [(visible)]="showDeleteUser"
+  [(visible)]="showDeleteFilm"
 >
   <p class="fs-16 text-black font-normal">
     <i class="pi pi-exclamation-triangle"></i>
-    Are you sure you want to delete this user?
+    Are you sure you want to delete this film?
   </p>
   <ng-template pTemplate="footer">
     <button
